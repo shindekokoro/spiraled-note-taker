@@ -31,7 +31,8 @@ body {
 }
 
 .note-title {
-  height: 50px;
+  line-height: 60px;
+  height: 60px;
   margin-top: 13px;
   font-size: 3rem;
 }
