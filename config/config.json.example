@@ -1,4 +1,5 @@
 {
     "port": 8080,
-    "index": "/public/index.html"
+    "root": "public",
+    "db": "db"
 }
