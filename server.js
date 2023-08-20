@@ -18,44 +18,44 @@ server.use(express.static(config.root))
 // Notes get request
 server.get('/notes', (request, response) => {
     let file = `${__dirname}/${config.root}/notes.html`
-    console.log('notes: ' + file);
     response.sendFile(file);
 });
 
-server.route('/api/notes')
-    // should read the db.json file and return all saved notes as JSON.
+// Routes for /api/notes and optional :id param 
+// get: request will read the db.json if it exists.
+// post: will save user input to db.json.
+// delete: will remove the note with the given id property, and then rewrite the notes to the db.json file.
+server.route('/api/notes/:id?')
     .get((request, response) => {
         let file = `${__dirname}/${config.db}/db.json`;
         if (!fs.existsSync(file)) {
             fs.writeFileSync(file, '[\n]')
         }
-        console.log(file);
-        console.log('attempting api get');
         response.sendFile(file)
     })
-    // should receive a new note to save on the request body,
-    // add it to the db.json file, and then return the new note to the client.
-    // You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
     .post((request, response) => {
-        let file = `./${config.db}/db.json`
-        let userData = request.body
+        let file = `./${config.db}/db.json`;
+        let db = JSON.parse(fs.readFileSync(file));
+        let userData = request.body;
 
         userData['id'] = idGenerator();
         db.push(userData);
-        fs.writeFileSync(`./${config.db}/db.json`, JSON.stringify(db));
+        fs.writeFileSync(file, JSON.stringify(db, null, '\t'));
+        response.send('Successfully updated db.json');
+    })
+    .delete((request, response) => {
+        let file = `./${config.db}/db.json`;
+        let db = JSON.parse(fs.readFileSync(file));
+        let updatedDb = db.filter(entry => parseInt(entry.id) !== parseInt(request.params.id));
+
+        fs.writeFileSync(file, JSON.stringify(updatedDb, null, '\t'));
+        response.send('Note Successfully deleted.')
     });
-// should receive a query parameter containing the id of a note to delete.
-// In order to delete a note, you'll need to read all notes from the db.json file,
-// remove the note with the given id property, and then rewrite the notes to the db.json file.
-server.delete('/api/notes/:id', (request, response) => {
-    console.log('attempting api delete');
-    response.send('notes api delete')
-});
 
 // Index && Handle all non-specific requests (i.e. 404)
 server.get('*', (request, response) => {
     let file = `${__dirname}/${config.root}/index.html`
-    console.log('index: ' + file);
+    // console.log('index: ' + file);
     response.sendFile(file);
 });
 
