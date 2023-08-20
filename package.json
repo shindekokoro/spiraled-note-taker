@@ -1,0 +1,25 @@
+{
+  "name": "spiraled-note-taker",
+  "version": "0.0.1",
+  "description": "Spiraled Note Taker replaces your old spiraled note book allowing you to take notes on the web using an express.js server to host the files.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shindekokoro/spiraled-note-taker.git"
+  },
+  "keywords": [
+    "note"
+  ],
+  "author": "shindekokoro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shindekokoro/spiraled-note-taker/issues"
+  },
+  "homepage": "https://github.com/shindekokoro/spiraled-note-taker#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
