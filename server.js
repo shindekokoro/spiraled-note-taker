@@ -4,6 +4,11 @@ const bodyParser = require('body-parser')
 const fs = require('fs');
 const server = express();
 
+// Use unix timestamp as ID
+const idGenerator = () => {
+    return Math.floor(Date.now() / 1000)
+}
+
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: false }))
 
@@ -20,7 +25,11 @@ server.get('/notes', (request, response) => {
 server.route('/api/notes')
     // should read the db.json file and return all saved notes as JSON.
     .get((request, response) => {
-        let file = `${__dirname}/${config.db}/db.json`
+        let file = `${__dirname}/${config.db}/db.json`;
+        if (!fs.existsSync(file)) {
+            fs.writeFileSync(file, '[\n]')
+        }
+        console.log(file);
         console.log('attempting api get');
         response.sendFile(file)
     })
@@ -28,11 +37,12 @@ server.route('/api/notes')
     // add it to the db.json file, and then return the new note to the client.
     // You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
     .post((request, response) => {
-        let db = JSON.parse(fs.readFileSync(`./${config.db}/db.json`));
+        let file = `./${config.db}/db.json`
         let userData = request.body
+
+        userData['id'] = idGenerator();
         db.push(userData);
         fs.writeFileSync(`./${config.db}/db.json`, JSON.stringify(db));
-        console.log('attempting api post');
     });
 // should receive a query parameter containing the id of a note to delete.
 // In order to delete a note, you'll need to read all notes from the db.json file,
