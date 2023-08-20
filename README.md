@@ -17,7 +17,11 @@ Spiraled Note Taker replaces your old spiraled note book allowing you to take no
 `git clone https://github.com/shindekokoro/spiraled-note-taker`
 
 ## Usage
-`node index.js`
+1. Rename `/config/config.json.example` to `/config/config.json`
+2. Make any changes to `config.json` as needed
+3. Install pm2 server to ensure daemonization of app to keep alive.
+4. `pm2 start server.js --name sNotes` add `--watch` to automatically restart on changes.
+5. `pm2 stop sNotes`
 
 ## License
 [MIT](http://choosealicense.com/licenses/mit/)
