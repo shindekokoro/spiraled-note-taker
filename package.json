@@ -4,6 +4,7 @@
   "description": "Spiraled Note Taker replaces your old spiraled note book allowing you to take notes on the web using an express.js server to host the files.",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
