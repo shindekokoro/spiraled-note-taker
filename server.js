@@ -60,6 +60,6 @@ server.get('*', (request, response) => {
 });
 
 // Start express server.
-server.listen(config.port, () => {
+server.listen(process.env.PORT || config.port, () => {
     console.log(`Server started on port ${config.port}`);
 });
