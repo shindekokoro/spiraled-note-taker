@@ -1,6 +1,6 @@
 {
   "name": "spiraled-note-taker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Spiraled Note Taker replaces your old spiraled note book allowing you to take notes on the web using an express.js server to host the files.",
   "main": "server.js",
   "scripts": {
