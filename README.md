@@ -9,6 +9,7 @@ Spiraled Note Taker replaces your old spiraled note book allowing you to take no
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Preview](#preview)
 - [License](#license)
 - [Tests](#tests)
 - [Questions](#questions)
@@ -23,6 +24,12 @@ Spiraled Note Taker replaces your old spiraled note book allowing you to take no
 3. `pm2 start server.js --name sNotes`
    - add `--watch` to automatically restart on changes, only recommended for testing. Will cause unexpected behavior on live.
 4. `pm2 stop sNotes` to stop
+
+## Preview
+[Heroku Deployed Link](https://spiraled-note-taker-231d6b6a70a7.herokuapp.com)
+
+![Preview1](./preview1.jpg)
+![Preview2](./preview2.jpg)
 
 ## License
 [MIT](http://choosealicense.com/licenses/mit/)
