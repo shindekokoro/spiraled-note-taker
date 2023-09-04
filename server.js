@@ -1,6 +1,6 @@
-const config = require('./config/config.json')
+const config = require('./config/config.json');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const server = express();
 
@@ -37,7 +37,7 @@ server.route('/api/notes/:id?')
         let file = `./${config.db}/db.json`;
         let db = JSON.parse(fs.readFileSync(file));
         let userData = request.body;
-
+        console.log(userData);
         userData['id'] = idGenerator();
         db.push(userData);
         fs.writeFileSync(file, JSON.stringify(db, null, '\t'));
