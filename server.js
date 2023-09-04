@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const server = express();
+const port = process.env.PORT || config.port;
 
 // Use unix timestamp as ID
 const idGenerator = () => {
@@ -60,6 +61,6 @@ server.get('*', (request, response) => {
 });
 
 // Start express server.
-server.listen(process.env.PORT || config.port, () => {
-    console.log(`Server started on port ${config.port}`);
+server.listen(port, () => {
+    console.log(`Server started on port ${port}`);
 });
