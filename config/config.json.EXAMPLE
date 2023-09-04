@@ -1,5 +1,6 @@
 {
     "port": 8080,
     "root": "public",
-    "db": "db"
+    "db": "db",
+    "logging": false
 }

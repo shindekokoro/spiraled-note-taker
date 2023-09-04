@@ -26,26 +26,24 @@ server.get('/notes', (request, response) => {
 // get: request will read the db.json if it exists.
 // post: will save user input to db.json.
 // delete: will remove the note with the given id property, and then rewrite the notes to the db.json file.
+let file = `${__dirname}/${config.db}/db.json`;
 server.route('/api/notes/:id?')
     .get((request, response) => {
-        let file = `${__dirname}/${config.db}/db.json`;
         if (!fs.existsSync(file)) {
             fs.writeFileSync(file, '[\n]')
         }
         response.sendFile(file)
     })
     .post((request, response) => {
-        let file = `./${config.db}/db.json`;
         let db = JSON.parse(fs.readFileSync(file));
         let userData = request.body;
-        console.log(userData);
+        config.logging ? console.log(userData) : '';
         userData['id'] = idGenerator();
         db.push(userData);
         fs.writeFileSync(file, JSON.stringify(db, null, '\t'));
         response.send('Successfully updated db.json');
     })
     .delete((request, response) => {
-        let file = `./${config.db}/db.json`;
         let db = JSON.parse(fs.readFileSync(file));
         let updatedDb = db.filter(entry => parseInt(entry.id) !== parseInt(request.params.id));
 
@@ -55,9 +53,9 @@ server.route('/api/notes/:id?')
 
 // Index && Handle all non-specific requests (i.e. 404)
 server.get('*', (request, response) => {
-    let file = `${__dirname}/${config.root}/index.html`
+    let index = `${__dirname}/${config.root}/index.html`
     // console.log('index: ' + file);
-    response.sendFile(file);
+    response.sendFile(index);
 });
 
 // Start express server.
