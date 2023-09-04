@@ -21,7 +21,7 @@ Spiraled Note Taker replaces your old spiraled note book allowing you to take no
 1. Make any changes to `config.json` as needed
 2. Install pm2 server to ensure daemonization of app to keep alive. Use the command below if you don't have pm2 installed.
    - `npm install pm2 -g`
-3. `npm run start`
+3. `npm run start-pm2`
    - `npm run watch` to automatically restart on changes, only recommended for testing. Will cause unexpected behavior on live.
 4. `npm run stop` or `pm2 stop sNotes` to stop
 
