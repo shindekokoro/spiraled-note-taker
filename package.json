@@ -4,7 +4,7 @@
   "description": "Spiraled Note Taker replaces your old spiraled note book allowing you to take notes on the web using an express.js server to host the files.",
   "main": "server.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production &",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "watch": "pm2 start server.js --name sNotes --watch",
     "stop": "pm2 stop sNotes",
     "test": "echo \"Error: no test specified\" && exit 1"
