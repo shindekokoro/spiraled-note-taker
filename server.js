@@ -27,15 +27,15 @@ server.get('/notes', (request, response) => {
 // post: will save user input to db.json.
 // delete: will remove the note with the given id property, and then rewrite the notes to the db.json file.
 let file = `${__dirname}/${config.db}/db.json`;
+let db = JSON.parse(fs.readFileSync(file));
 server.route('/api/notes/:id?')
     .get((request, response) => {
         if (!fs.existsSync(file)) {
-            fs.writeFileSync(file, '[\n]')
+            fs.writeFileSync(file, '[\n]');
         }
-        response.sendFile(file)
+        response.sendFile(file);
     })
     .post((request, response) => {
-        let db = JSON.parse(fs.readFileSync(file));
         let userData = request.body;
         config.logging ? console.log(userData) : '';
         userData['id'] = idGenerator();
@@ -44,7 +44,6 @@ server.route('/api/notes/:id?')
         response.send('Successfully updated db.json');
     })
     .delete((request, response) => {
-        let db = JSON.parse(fs.readFileSync(file));
         let updatedDb = db.filter(entry => parseInt(entry.id) !== parseInt(request.params.id));
 
         fs.writeFileSync(file, JSON.stringify(updatedDb, null, '\t'));
@@ -53,8 +52,8 @@ server.route('/api/notes/:id?')
 
 // Index && Handle all non-specific requests (i.e. 404)
 server.get('*', (request, response) => {
-    let index = `${__dirname}/${config.root}/index.html`
-    // console.log('index: ' + file);
+    let index = `${__dirname}/${config.root}/index.html`;
+    config.logging ? console.log('index: ' + file) : '';
     response.sendFile(index);
 });
 
